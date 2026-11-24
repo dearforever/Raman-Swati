@@ -181,7 +181,7 @@ select option{color:#000}
 <section class="alt"><div class="wrap"><h2 class="rv">Venue</h2><i class="orn"></i>
  <p class="rv"><strong id="vn"></strong><br><span id="va"></span></p>
  <svg viewBox="0 0 300 150" class="rv" style="width:100%;max-width:420px;margin:1.5rem auto;display:block;border-radius:18px" role="img" aria-label="Decorative illustration"><rect width="300" height="150" fill="#2a0509" stroke="#d8b46a" stroke-opacity=".5" rx="12"/><path d="M0 100Q80 60 150 90T300 50M60 0Q90 70 70 150M220 0Q200 80 240 150" stroke="#d8b46a" stroke-opacity=".35" fill="none" stroke-dasharray="4 4"/><path d="M150 40a14 14 0 1 1 .1 0L150 78z" fill="#d8b46a"/><circle cx="150" cy="40" r="5" fill="#2a0509"/></svg>
- <a class="btn" id="dir" target="_blank" rel="noopener">Get Directions</a> <button id="ics" style="margin-top:.8rem">Add to Calendar</button></div></section>
+ <a class="btn" id="dir" target="_blank" rel="noopener">Get Directions</a> <a class="btn" id="dir2" target="_blank" rel="noopener" style="margin-top:.8rem">Lagan Sagai Directions</a> <button id="ics" style="margin-top:.8rem">Add to Calendar</button></div></section>
 
 <section><div class="wrap"><h2 class="rv">Gallery</h2><i class="orn"></i><div class="gal" id="gal"></div></div></section>
 
@@ -220,11 +220,9 @@ const WEDDING_CONFIG={
    {name:"Wedding", date:"2026-12-12", time:"19:00", venue:"Raj Rajeshwari Banquet — Behind HRIT College, Opposite D.P.S. School, Morta Meerut Road, Ghaziabad", dress:"", map:"https://maps.app.goo.gl/hQQs7Th4FSu59sqw5?g_st=ic"}
  ],
  photos:[
-   "https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=900&q=80",
-   "https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=900&q=80",
-   "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=80",
-   "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80",
-   "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=900&q=80"
+   "https://i.ibb.co/2Q0Vq1X/Picsart-26-11-24-15-49-31-805.jpg",
+   "https://i.ibb.co/TxTNgKDD/Picsart-26-11-24-15-48-46-855.jpg",
+   "https://i.ibb.co/7tCrr19D/Picsart-26-11-24-15-49-09-820.jpg"
  ]
 };
 /* ============================================================================== */
@@ -241,8 +239,9 @@ $("hdate").textContent=$("fdate").textContent=dstr;$("cdh").textContent=dstr;
 $("welcome").textContent=C.welcomeMessage;$("foot").textContent=C.footerMessage;$("fam").textContent=C.familiesLine;
 $("vn").textContent=C.venueName;$("va").textContent=C.venueAddress;$("dc").textContent=C.dressCode;
 const dir=$("dir");C.mapsUrl?dir.href=C.mapsUrl:(dir.style.display="none");
+const dir2=$("dir2"),lagan=C.events.find(e=>/lagan/i.test(e.name));lagan&&lagan.map?dir2.href=lagan.map:(dir2.style.display="none");
 
-$("tl").innerHTML=C.events.map(e=>`<article class="ev rv"><h3>${esc(e.name)}</h3><p>${esc(e.date)} · ${esc(e.time)}<br>${esc(e.venue)}${e.dress?`<br><em>Dress: ${esc(e.dress)}</em>`:""}${e.map?`<br><a href="${esc(e.map)}" target="_blank" rel="noopener">Directions</a>`:""}</p></article>`).join("");
+$("tl").innerHTML=C.events.map(e=>`<article class="ev rv"><h3>${esc(e.name)}</h3><p>${esc(e.date.split("-").reverse().join("-"))} · ${esc(e.time)}<br>${esc(e.venue)}${e.dress?`<br><em>Dress: ${esc(e.dress)}</em>`:""}${e.map?`<br><a href="${esc(e.map)}" target="_blank" rel="noopener">Directions</a>`:""}</p></article>`).join("");
 
 /* countdown */
 function tick(){const ms=T-Date.now();if(isNaN(T))return;
